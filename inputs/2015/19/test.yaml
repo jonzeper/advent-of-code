@@ -1,0 +1,8 @@
+part_1:
+  test.txt: 4
+  test2.txt: 7
+  input.txt: 576
+part_2:
+  test_p2.txt: 3
+  test_p2_2.txt: 6
+  input.txt: 207
