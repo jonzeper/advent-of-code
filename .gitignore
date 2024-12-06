@@ -1,0 +1,7 @@
+elixir/_build
+elixir/deps
+
+**/rust/target
+
+.pixi
+__pycache__

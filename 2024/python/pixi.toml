@@ -1,0 +1,15 @@
+[project]
+authors = ["Jon Zepernick <jonzeper@gmail.com>"]
+channels = ["conda-forge"]
+description = "Advent of Code Skeleton"
+name = "python"
+platforms = ["osx-arm64"]
+version = "0.1.0"
+
+[tasks]
+main = "python main.py"
+
+[dependencies]
+python = ">=3.12,<3.13"
+pyyaml = ">=6.0.2,<7"
+typer = ">=0.15.0,<0.16"
