@@ -5,9 +5,9 @@ import typer
 import yaml
 
 import timeit
+import random
 
-
-def run_part(day: int, part: int = 1, bench: int = 0):
+def run_part(day: int, part: int = 1, bench: int = 0, benchmark_baseline: float = 0.0):
     day_str = f"{int(day):02d}"
     test_cases = get_test_cases(day_str, part)
     s = importlib.import_module(f"solutions.{day_str}")
@@ -22,11 +22,12 @@ def run_part(day: int, part: int = 1, bench: int = 0):
         prepped_input = prep_func(input_lines) if prep_func else input_lines
         result = run_func(prepped_input)
         shouldbe = f"(should be {expected_result})" if result != expected_result else ""
+        print(f"{input}: {result} {shouldbe}")
         if bench:
             elapsed = timeit.timeit(lambda: run_func(prepped_input), number=bench)
-            print(f"{input}: {result} {shouldbe} (Ran {bench} times in {elapsed}s)")
-        else:
-            print(f"{input}: {result} {shouldbe}")
+            print(f"    Ran {bench} times in {elapsed:.3f}s")
+            print(f"    Baseline: {benchmark_baseline:.3f}")
+            print(f"    Score: {(elapsed / benchmark_baseline):.3f}")
 
 
 def get_test_cases(day_str: int, part: int):
@@ -47,6 +48,11 @@ def get_input_lines(day_str: str, key: str) -> list[str]:
         return [key]
 
 
+def bench_base():
+    ns = list(range(100_000))
+    random.shuffle(ns)
+    ns.sort()
+
 
 app = typer.Typer()
 
@@ -56,13 +62,17 @@ app = typer.Typer()
 # Run both parts of day 1 and benchmark 10k repetitions: `pixi run main 1 --bench 10000`
 @app.command()
 def run(day: int, part: int = 0, bench: int = 0):
+    benchmark_baseline = 0.0
+    if bench:
+        print("Determining baseline for benchmarks...")
+        benchmark_baseline = min(timeit.repeat(bench_base, number=30, repeat=5))
     if part == 0:
         print("-- part one --")
-        run_part(day, 1, bench)
+        run_part(day, 1, bench, benchmark_baseline)
         print("-- part two --")
-        run_part(day, 2, bench)
+        run_part(day, 2, bench, benchmark_baseline)
     else:
-        run_part(day, part, bench)
+        run_part(day, part, bench, benchmark_baseline)
 
 
 if __name__ == "__main__":
