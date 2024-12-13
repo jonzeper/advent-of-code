@@ -1,0 +1,8 @@
+part_1:
+  small-test.txt: 1
+  test.txt: 36
+  input.txt: 841
+part_2:
+  small-pt-2-test.txt: 227
+  test.txt: 81
+  input.txt: 1875
