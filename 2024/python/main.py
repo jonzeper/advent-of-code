@@ -43,7 +43,10 @@ def get_input_lines(day_str: str, key: str) -> list[str]:
         input = open(f"{here}/../../inputs/2024/{day_str}/{key}").read()
         if "\n" in input:
             input = input.split("\n")
-            return list(filter(lambda x: x != "", input))
+            if input[-1] == "": # Remove trailing blank line
+                return input[0:-1]
+            else:
+                return input
     else:
         return [key]
 

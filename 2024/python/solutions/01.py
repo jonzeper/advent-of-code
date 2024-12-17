@@ -1,22 +1,18 @@
 def part_one(lines: list[str]) -> int:
     a1 = []
     a2 = []
-    # Optimization opportunity: Insert in sorted order
     for line in lines:
-        i1, i2 = [int(i) for i in line.split()]
+        i1, i2 = (int(i) for i in line.split())
         a1.append(i1)
         a2.append(i2)
 
     a1.sort()
     a2.sort()
-    return sum((
-        abs(a1[i] - a2[i]) for i in range(len(a1) -1)
-    ))
+    return sum(abs(a1[i] - a2[i]) for i in range(len(a1)))
 
 def part_two(lines: list[str]) -> int:
     a1 = []
     a2 = []
-    # Optimization opportunity: Insert in sorted order
     for line in lines:
         i1, i2 = [int(i) for i in line.split()]
         a1.append(i1)

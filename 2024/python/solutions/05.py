@@ -4,6 +4,8 @@ def part_one_prep(lines: list[str]) -> list[int]:
     page_order_rules = []
     page_updates = []
     for line in lines:
+        if line == "":
+            continue
         if "|" in line:
             page_order_rules.append(line.split("|"))
         else:
