@@ -1,0 +1,6 @@
+part_1:
+  test.txt: 6
+  input.txt: 350
+part_2:
+  test.txt: 16
+  # input.txt: 0 # Less than 1288773427117434095606157

@@ -1,0 +1,6 @@
+part_1:
+  test.txt: 22
+  input.txt: 288
+part_2:
+  test.txt: 6,1
+  input.txt: 52,5
